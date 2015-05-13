@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ds="http://deltaspike.apache.org/jsf"
+    xmlns:mycustom="http://java.sun.com/jsf/composite/mycustom">
+    
+    <f:view transient="false" encoding="UTF-8" locale="en" contentType="text/html; charset=UTF-8">
+    
+        <h:head>
+            <title>DeltaSpike</title>                        
+            <script type='text/javascript'>
+                //<![CDATA[
+                //]]>
+            </script>
+            <ds:windowId/>         
+        </h:head>
+        
+        <h:body onload="">    
+            
+            <!-- Show the windowId-->            
+            <h:form>
+                <p:messages id="globalMessages"/>
+                <h:outputText value="WindowId: " /><h:outputText value="#{cr100.windowId}" />                                   
+                <p:outputLabel for="treeDepth" ></p:outputLabel>
+                <p:inputText id="treeDepth" value="#{invokeFacade.treeDepth}"></p:inputText>
+                <p:commandButton value="createInfiniteRecursiveEntity" action="#{invokeFacade.execute()}" update="@form"/>
+            </h:form>
+                
+            
+                                              
+       </h:body> 
+    </f:view>
+</html>
