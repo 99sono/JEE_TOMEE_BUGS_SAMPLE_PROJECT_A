@@ -17,12 +17,12 @@
 
     <dependencies>                
 
-		<dependency>
-			<groupId>weblogicbugs</groupId>
+        <dependency>
+            <groupId>weblogicbugs</groupId>
             <artifactId>corba-serilization-infinite-loop-ejb</artifactId>
-			<version>1.0-SNAPSHOT</version>
+            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
-		</dependency>
+        </dependency>
                    
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -138,11 +138,11 @@
             <scope>provided</scope>
         </dependency>        
         <!-- This packages seems to leak into the unit test excution
-                and its javax.transaction.SystemException is just a shell without code.
-                Weblogic full client ahas the true implementation but it
-                has a bad interfaces for the entity manager, whereby the em.getPropreties() does not work if weblogic
-                sits in the front of this library to compile the create database.
-            -->
+            and its javax.transaction.SystemException is just a shell without code.
+            Weblogic full client ahas the true implementation but it
+            has a bad interfaces for the entity manager, whereby the em.getPropreties() does not work if weblogic
+            sits in the front of this library to compile the create database.
+        -->
         <dependency>            
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
@@ -159,7 +159,7 @@
             <scope>test</scope>
         </dependency>
         
-		<!-- JNDI EJB Client for weblogic -->
+        <!-- JNDI EJB Client for weblogic -->
         <!--dependency>       
             <groupId>groupId</groupId>
             <artifactId>artifactId</artifactId>
@@ -168,12 +168,12 @@
             <systemPath>${env.MW_HOME}/wlserver/server/lib/wlfullclient.jar</systemPath>                      
         </dependency-->    
 		
-		<!-- Full client dependency -->
-		<dependency>
+        <!-- Full client dependency -->
+        <dependency>
             <groupId>org.glassfish.main.appclient.client</groupId>
             <artifactId>gf-client</artifactId>
             <scope>test</scope>
-			<version>3.1.2</version>
+            <version>3.1.2</version>
         </dependency>
         
         <!--dependency>
@@ -234,19 +234,29 @@
                     </configuration>
                 </plugin>
                 
-                 <plugin>
-                     <groupId>org.apache.maven.plugins</groupId>
-                     <artifactId>maven-surefire-plugin</artifactId>
-                     <version>2.18.1</version>
-                     <configuration>
-                         <!--We want to exclude the javaee api from test runtime dependency since CORBA will just break
-                            with class missing implementation errors.
-                         -->
-                         <classpathDependencyExcludes>
-                             <classpathDependencyExcludes>javax:javaee-api</classpathDependencyExcludes>
-                         </classpathDependencyExcludes>
-                     </configuration>
-                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.18.1</version>
+                    <configuration>
+                        <!-- Use this property to check how big a stack is needed
+                        when transferring enroumous JPA data structures from corpa.
+                        7Megabytes eesm to allow to return a 1000 deep netested recursive entities without a stack overflow.                      
+                        -->
+                        <argLine>-Xss7m</argLine>
+                        <systemProperties>
+                            <property>
+                                <name>putYourPropertiesHere</name>           
+                            </property>
+                        </systemProperties>
+                        <!--We want to exclude the javaee api from test runtime dependency since CORBA will just break
+                           with class missing implementation errors.
+                        -->
+                        <classpathDependencyExcludes>
+                            <classpathDependencyExcludes>javax:javaee-api</classpathDependencyExcludes>
+                        </classpathDependencyExcludes>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

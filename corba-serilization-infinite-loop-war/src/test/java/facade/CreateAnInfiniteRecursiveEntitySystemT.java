@@ -38,7 +38,7 @@ public class CreateAnInfiniteRecursiveEntitySystemT {
 
     @Test
     public void tryToGetInterceptorToDie() throws InterruptedException {
-        Integer idEntityThatIsIfinitelyRecursive = remoteFacade.createInfiniteRecursiveEntity(200);
+        Integer idEntityThatIsIfinitelyRecursive = remoteFacade.createInfiniteRecursiveEntity(1000);
         SomeEntity infiniteRecursiveEntity = remoteFacade.fetchEntityById(idEntityThatIsIfinitelyRecursive);
         System.out.println(infiniteRecursiveEntity);
     }
