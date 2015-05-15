@@ -1,0 +1,1 @@
+asadmin add-resources oracleXE.xml

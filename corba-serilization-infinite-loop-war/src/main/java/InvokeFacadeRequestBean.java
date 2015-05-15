@@ -1,5 +1,4 @@
 
-import db.model.SomeEntity;
 import facade.api.ModelCrudFacadeRemote;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -9,6 +8,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import db.model.SomeEntity;
 
 @RequestScoped
 @Named(value = "invokeFacade")

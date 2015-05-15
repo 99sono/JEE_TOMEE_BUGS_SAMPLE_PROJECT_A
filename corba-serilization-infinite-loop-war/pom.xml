@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>weblogicbugs</groupId>
+        <groupId>tomee-bugs</groupId>
         <artifactId>corba-serilization-infinite-loop-root</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -10,7 +10,7 @@
     <artifactId>corba-serilization-infinite-loop-war</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>${artifactId}</name>
+    <name>${project.artifactId}</name>
     <url>http://maven.apache.org</url>
 
 
@@ -18,17 +18,20 @@
     <dependencies>                
 
         <dependency>
-            <groupId>weblogicbugs</groupId>
-            <artifactId>corba-serilization-infinite-loop-ejb</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>tomee-bugs</groupId>
+            <artifactId>corba-serilization-infinite-loop-core-ejb</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>tomee-bugs</groupId>
+            <artifactId>corba-serilization-infinite-loop-main-ejb</artifactId>
+        </dependency>
+        
+        
                    
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.1</version>
-            <scope>provided</scope>
         </dependency>
                 
         <!--dependency>
@@ -44,85 +47,62 @@
         <dependency>
             <groupId>org.apache.deltaspike.core</groupId>
             <artifactId>deltaspike-core-api</artifactId>
-            <version>1.2.1</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.deltaspike.core</groupId>
             <artifactId>deltaspike-core-impl</artifactId>
-            <version>1.2.1</version>
-            <scope>runtime</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.deltaspike.modules</groupId>
             <artifactId>deltaspike-jsf-module-api</artifactId>
-            <version>1.2.1</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.deltaspike.modules</groupId>
             <artifactId>deltaspike-jsf-module-impl-ee6</artifactId>
-            <version>1.2.1</version>
-            <scope>runtime</scope>
         </dependency>
 
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>3.4.2</version>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.faces</artifactId>
-            <version>2.1.25</version>
-            <scope>provided</scope>
         </dependency>
         
 
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>el-api</artifactId>
-            <version>2.2</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.sun.el</groupId>
             <artifactId>el-ri</artifactId>
-            <version>1.0</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
-            <version>1.0</version>
-            <scope>provided</scope>
         </dependency>
             
         <dependency>
             <groupId>javax.jms</groupId>
             <artifactId>jms-api</artifactId>
-            <version>1.1-rev-1</version>
-            <scope>provided</scope>
         </dependency>
         
         
@@ -134,8 +114,6 @@
             <!-- Fixes Absent Code attribute in method that is not native or abstract in class file javax/transaction/SystemException-->
             <groupId>org.glassfish.main.transaction</groupId>
             <artifactId>javax.transaction</artifactId>
-            <version>3.1.2</version>
-            <scope>provided</scope>
         </dependency>        
         <!-- This packages seems to leak into the unit test excution
             and its javax.transaction.SystemException is just a shell without code.
@@ -146,8 +124,6 @@
         <dependency>            
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
         </dependency>                       
         
         
@@ -155,8 +131,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
         </dependency>
         
         <!-- JNDI EJB Client for weblogic -->
@@ -172,93 +146,28 @@
         <dependency>
             <groupId>org.glassfish.main.appclient.client</groupId>
             <artifactId>gf-client</artifactId>
-            <scope>test</scope>
-            <version>3.1.2</version>
-        </dependency>
-        
-        <!--dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.ejb</artifactId>
-            <version>3.1.1</version>
-        </dependency-->
- 
+        </dependency>       
 
     </dependencies>
 
 
     <build>
-        <finalName>${artifactId}</finalName>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.5.1</version>
-                    <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.3</version>
-                    <configuration>
-                        <packagingExcludes>**/rebel.xml</packagingExcludes>
-                        <outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-eclipse-plugin</artifactId>
-                    <version>2.9</version>
-                    <configuration>
-                        <wtpversion>2.0</wtpversion>
-                        <downloadSources>true</downloadSources>
-                        <downloadJavadocs>true</downloadJavadocs>
-                        <additionalProjectnatures>
-                            <projectnature>org.jboss.tools.jst.web.kb.kbnature</projectnature>
-                        </additionalProjectnatures>
-                        <buildcommands>
-                            <buildcommand>org.eclipse.jdt.core.javabuilder</buildcommand>
-                            <buildcommand>org.eclipse.wst.common.project.facet.core.builder</buildcommand>
-                            <buildcommand>org.jboss.tools.jst.web.kb.kbbuilder</buildcommand>
-                            <buildcommand>org.eclipse.wst.validation.validationbuilder</buildcommand>
-                        </buildcommands>
-                        <additionalProjectFacets>
-                            <jst.web>3.0</jst.web>
-                            <jst.jsf>2.1</jst.jsf>
-                            <jst.cdi>1.0</jst.cdi>
-                        </additionalProjectFacets>
-                    </configuration>
-                </plugin>
-                
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.18.1</version>
-                    <configuration>
-                        <!-- Use this property to check how big a stack is needed
-                        when transferring enroumous JPA data structures from corpa.
-                        7Megabytes eesm to allow to return a 1000 deep netested recursive entities without a stack overflow.                      
-                        -->
-                        <argLine>-Xss7m</argLine>
-                        <systemProperties>
-                            <property>
-                                <name>putYourPropertiesHere</name>           
-                            </property>
-                        </systemProperties>
-                        <!--We want to exclude the javaee api from test runtime dependency since CORBA will just break
-                           with class missing implementation errors.
-                        -->
-                        <classpathDependencyExcludes>
-                            <classpathDependencyExcludes>javax:javaee-api</classpathDependencyExcludes>
-                        </classpathDependencyExcludes>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+                 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>                  
+            </plugin>
+        </plugins>
     </build>
 
 

@@ -3,7 +3,9 @@
 	<persistence-unit name="ContainerManagedXaPU" transaction-type="JTA">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>                
 		<jta-data-source>jdbc/ORCL_XA</jta-data-source>
-		<class>model.SomeEntity</class>
+                <jar-file>../corba-serilization-infinite-loop-core-ejb.jar</jar-file>
+                <!-- Entities defined within this jar file-->
+		<class>model.SomeEntityB</class>
 		<properties>
 		<property name="eclipselink.logging.level" value="INFO" />
 		<property name="eclipselink.logging.level.sql" value="INFO" />
@@ -18,6 +20,7 @@
         <persistence-unit name="CreateDbPU" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>                
 		<non-jta-data-source>jdbc/ORCL_NON_XA</non-jta-data-source>
+                <jar-file>../corba-serilization-infinite-loop-core-ejb.jar</jar-file>
 		<class>model.SomeEntity</class>
 		<properties>
 		<property name="eclipselink.logging.level" value="INFO" />
