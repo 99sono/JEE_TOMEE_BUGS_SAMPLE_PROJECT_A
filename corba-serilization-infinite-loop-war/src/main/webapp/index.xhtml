@@ -30,7 +30,19 @@
                 <p:inputText id="treeDepth" value="#{invokeFacade.treeDepth}"></p:inputText>
                 <p:commandButton value="createInfiniteRecursiveEntity" action="#{invokeFacade.execute()}" update="@form"/>
             </h:form>
-                
+            
+            <!-- Just computes the length in a text box.
+                The point is to see if an utility used by the bean
+            has had its state corrupted by the CDI engine.
+            -->
+            <h:form>
+                <p:messages id="globalMessages2"/>
+                <p:outputLabel for="userInput" value="UserInput: "></p:outputLabel>
+                <p:inputText id="userInput" value="#{utilRequestBean.userInput}">
+                    <p:ajax event="keyup" async="true" update="globalMessages2,inputLength" listener="#{utilRequestBean.execute()}" />
+                </p:inputText>                
+               <h:outputText value="Length: " /><h:outputText id="inputLength" value="#{utilRequestBean.inputLength}" />     
+            </h:form>
             
                                               
        </h:body> 
