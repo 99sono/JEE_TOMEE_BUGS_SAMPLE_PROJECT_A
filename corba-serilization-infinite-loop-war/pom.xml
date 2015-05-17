@@ -11,7 +11,6 @@
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
-    <url>http://maven.apache.org</url>
 
 
 
@@ -146,6 +145,12 @@
         <dependency>
             <groupId>org.glassfish.main.appclient.client</groupId>
             <artifactId>gf-client</artifactId>
+            <!--exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.persistence</groupId>
+                    <artifactId>javax.persistence</artifactId>
+                </exclusion>
+            </exclusions-->
         </dependency>       
 
     </dependencies>
