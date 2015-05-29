@@ -4,10 +4,10 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>                
 		<jta-data-source>jdbc/ORCL_XA</jta-data-source>
                 <!-- USE THIS TO DEPLOY IN TOMEE -->
-                <jar-file>../corba-serilization-infinite-loop-core-ejb.jar</jar-file>
+                <!--jar-file>../corba-serilization-infinite-loop-core-ejb.jar</jar-file-->
                 
                 <!-- USE THIS TO DEPLOY IN GLASSFISH AND WEBLOGIC -->
-                <!--jar-file>corba-serilization-infinite-loop-core-ejb.jar</jar-file-->
+                <jar-file>corba-serilization-infinite-loop-core-ejb.jar</jar-file>
                 <!-- Entities defined within this jar file-->
 		<class>model.SomeEntityB</class>
 		<properties>
@@ -17,10 +17,10 @@
 		<property name="eclipselink.jdbc.sequence-connection-pool" value="true" />
                 
                  <!-- USE THIS TO DEPLOY IN TOMEE -->
-                <property name="eclipselink.jdbc.sequence-connection-pool.non-jta-data-source" value="java:openejb/Resource/jdbc/ORCL_NON_XA" />                
+                <!--property name="eclipselink.jdbc.sequence-connection-pool.non-jta-data-source" value="java:openejb/Resource/jdbc/ORCL_NON_XA" /-->                
                 
                 <!-- USE THIS TO DEPLOY IN GLASSFISH AND WEBLOGIC -->
-		<!--property name="eclipselink.jdbc.sequence-connection-pool.non-jta-data-source" value="jdbc/ORCL_NON_XA" /-->                
+		<property name="eclipselink.jdbc.sequence-connection-pool.non-jta-data-source" value="jdbc/ORCL_NON_XA" />                
 		<property name="javax.persistence.lock.timeout" value="2000" />
 		</properties>
 	</persistence-unit>
@@ -30,10 +30,10 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>                
 		<non-jta-data-source>jdbc/ORCL_NON_XA</non-jta-data-source>
                 <!-- USE THIS TO DEPLOY IN TOMEE -->
-                <jar-file>../corba-serilization-infinite-loop-core-ejb.jar</jar-file>
+                <!--jar-file>../corba-serilization-infinite-loop-core-ejb.jar</jar-file-->
                 
                 <!-- USE THIS TO DEPLOY IN GLASSFISH AND WEBLOGIC -->
-                <!--jar-file>corba-serilization-infinite-loop-core-ejb.jar</jar-file-->
+                <jar-file>corba-serilization-infinite-loop-core-ejb.jar</jar-file>
 		<class>model.SomeEntity</class>
 		<properties>
 		<property name="eclipselink.logging.level" value="INFO" />
