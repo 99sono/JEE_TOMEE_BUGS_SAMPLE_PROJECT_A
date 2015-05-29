@@ -81,8 +81,9 @@ At the date of the first push to the server the tomee.xml file contianing resour
 
 Current Set of Bugs Associated to this Project:
 <ul>
-  <li> https://issues.apache.org/jira/browse/TOMEE-1580
-  <li> https://issues.apache.org/jira/browse/TOMEE-1586
+  <li> https://issues.apache.org/jira/browse/TOMEE-1580 (Resolved on build  1.7.3 snapshot build 32)
+  <li> https://issues.apache.org/jira/browse/TOMEE-1586 (injection point on tomEE ok)
+  <li> https://issues.jboss.org/browse/WELD-1950 (opened injection point issue on jboss)
 </ul>
 
 <p>
